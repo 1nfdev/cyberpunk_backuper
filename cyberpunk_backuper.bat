@@ -47,10 +47,17 @@ ECHO.
 ECHO Backup attempt completed
 ECHO.
 
-ECHO Backuped saves:
-DIR /b "%SavesBackups%"
-ECHO.
+:: Is folder empty
+SET _temp=
+FOR /f "delims=" %%a in ('DIR /a /b "%SavesBackups%"') do SET _temp=%%a
 
-IF EXIST "%SavesBackups%" ECHO Backup created
+IF {%_temp%} NEQ {} (
+	ECHO Backup created
+	ECHO.
+
+	ECHO Backuped saves:
+	DIR /b "%SavesBackups%"
+	ECHO.
+)
 
 PAUSE
