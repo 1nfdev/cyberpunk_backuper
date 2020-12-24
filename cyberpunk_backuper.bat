@@ -32,7 +32,7 @@ SET SavesBackups=%CD%\SavesBackups\%timestamp%
 SET SavesFolder=%USERPROFILE%\Saved Games\CD Projekt Red\Cyberpunk 2077
 
 ECHO Saves:
-DIR /b "%SavesFolder%"
+DIR /P /S /B "%SavesFolder%"
 
 ECHO.
 ECHO Saves coping to %SavesBackups%
@@ -40,7 +40,7 @@ ECHO.
 
 IF NOT EXIST "%SavesBackups%" MD "%SavesBackups%"
 
-XCOPY /S "%SavesFolder%" "%SavesBackups%"
+XCOPY /S /E "%SavesFolder%" "%SavesBackups%"
 IF NOT EXIST "%SavesBackups%" ECHO "Backuping saves is failing"
 
 ECHO.
@@ -48,6 +48,7 @@ ECHO Backup attempt completed
 ECHO.
 
 :: Is folder empty
+
 SET _temp=
 FOR /f "delims=" %%a in ('DIR /a /b "%SavesBackups%"') do SET _temp=%%a
 
@@ -56,7 +57,7 @@ IF {%_temp%} NEQ {} (
 	ECHO.
 
 	ECHO Backuped saves:
-	DIR /b "%SavesBackups%"
+	DIR /P /S /B "%SavesBackups%"
 	ECHO.
 )
 
