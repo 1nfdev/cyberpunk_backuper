@@ -40,7 +40,7 @@ ECHO.
 
 IF NOT EXIST "%SavesBackups%" MD "%SavesBackups%"
 
-COPY "%SavesFolder%" "%SavesBackups%"
+XCOPY /S "%SavesFolder%" "%SavesBackups%"
 IF NOT EXIST "%SavesBackups%" ECHO "Backuping saves is failing"
 
 ECHO.
